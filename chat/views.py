@@ -1,10 +1,13 @@
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Message
 from django.db.models import Q
-
-
+from django.utils import timezone
+import datetime
+import pytz
+utc=pytz.UTC
 @login_required
 def chat_room(request, room_name):
     search_query = request.GET.get('search', '') 
@@ -33,9 +36,9 @@ def chat_room(request, room_name):
 
     # Sort user_last_messages by the timestamp of the last_message in descending order
     user_last_messages.sort(
-        key=lambda x: x['last_message'].timestamp if x['last_message'] else None,
-        reverse=True
-    )
+    key=lambda x: x['last_message'].timestamp if x['last_message'] else utc.localize(datetime.datetime.min),
+    reverse=True
+)
 
     return render(request, 'chat.html', {
         'room_name': room_name,

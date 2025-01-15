@@ -16,11 +16,11 @@ def login_page(request):
         if user is not None:
             login(request, user)
             messages.success(request, 'Login successful!')
-            return redirect('/chat/kishan/')
+            return redirect('/chat/lobby/')
         else:
             messages.error(request, 'Invalid email or password. Please try again.')
     if request.user.is_authenticated:
-        return redirect('/chat/kishan/')
+        return redirect('/chat/lobby/')
     return render(request,'login.html')
 
 

@@ -3,37 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Signup Page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f8f9fa;
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
         }
+
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Ensures no scrolling */
+        }
+
         .login-container {
             max-width: 400px;
-            margin: auto;
-            margin-top: 20%;
-            padding: 20px;
-            background: white;
+            width: 100%;
+            padding: 40px;
+            background: #222;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,9);
+            color: #fff;
         }
+
         .login-title {
             margin-bottom: 20px;
             text-align: center;
-            color: #2c3e50 !important;
+            color: #0f0;
+            font-size: 2em;
         }
-        button {
+
+        .form-group label {
+            color: #aaa;
+        }
+
+        .form-group input {
+            background: #333;
+            border: none;
+            outline: none;
+            padding: 25px 10px 7.5px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            border-color: #0f0;
+        }
+
+        .form-group input::placeholder {
+            color: #aaa;
+        }
+
+        .form-group button {
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid #0f0;
+            color: #0f0;
+            font-weight: 600;
+            font-size: 1.25em;
+            letter-spacing: 0.05em;
             cursor: pointer;
-            background: #2c3e50 !important;
-            border: none !important;
+            border-radius: 4px;
+            width: 100%;
+            transition: background 0.3s ease, color 0.3s ease;
         }
-        button:hover {
-            background: #34495e !important;
+
+        .form-group button:hover {
+            background: #0f0;
+            color: #000;
+        }
+
+        .form-group .center-btn {
+            text-align: center;
         }
 
         .link a {
-            color: #2c3e50;
+            color: #0f0;
+            font-weight: 600;
+        }
+
+        input[type="submit"]:active {
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -41,17 +102,17 @@
 
     <div class="container">
         {% if messages %}
-    <div class="container">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
-{% endif %}
+        {% endif %}
 
         <div class="login-container">
             <h2 class="login-title">Create Account</h2>
@@ -59,21 +120,23 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" required>
+                    <input type="text" class="form-control" id="email" name="email" required placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" name="username" required placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
+                    <input type="password" class="form-control" id="password" name="password" required placeholder="Password">
                 </div>
                 <div class="form-group">
                     <label for="confirm_password">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Confirm Password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Signup</button>
+                <div class="form-group center-btn">
+                    <button type="submit" class="btn btn-outline-success">Signup</button>
+                </div>
             </form>
             <div class="text-center link mt-3">
                 <a href="/">Already have an account? Login</a>
