@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90North</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(5, 38, 136);
+            z-index: 1000;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            color: white;
+        }
+        navbar ul {
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+        navbar li {
+            margin-left: 15px;
+            color: white;
+            cursor: pointer;
+        }
+        #toggleBtn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .left-menu {
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            position: fixed;
+            left: 0;
+            top: 50px;
+            bottom: 50px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+        .left-menu.collapsed {
+            transform: translateX(-200px);
+        }
+        .main-content {
+            margin-left: 200px;
+            margin-right: 250px;
+            padding: 20px;
+            background-color: #ffffff;
+            transition: margin-left 0.3s ease;
+        }
+        .main-content.expanded {
+            margin-left: 0;
+        }
+        .right-panel {
+            width: 250px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            top: 50px;
+            bottom: 50px;
+            overflow: auto;
+        }
+        footer {
+            background-color: rgb(5, 38, 136);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+        }
+        .collapse-btn {
+            background: rgb(5, 38, 136);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <navbar>
+        <ul>
+            <li>
+                <button id="toggleBtn">☰</button>
+            </li>
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+        </ul>
+    </navbar>
+
+    <div class="left-menu" id="leftMenu">
+        <div>
+            <h2>Left Menu</h2>
+            <ul>
+                <li>Menu Item 1</li>
+                <li>Menu Item 2</li>
+                <li>Menu Item 3</li>
+            </ul>
+        </div>
+        <button class="collapse-btn" id="collapseBtn">Collapse</button>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>Main Content</h1>
+        <p>Your main content goes here...</p>
+    </div>
+
+    <div class="right-panel">
+        <h2>Right Panel</h2>
+        <p>Additional information...</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Binayak. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const leftMenu = document.getElementById('leftMenu');
+            const mainContent = document.getElementById('mainContent');
+            const toggleBtn = document.getElementById('toggleBtn');
+            const collapseBtn = document.getElementById('collapseBtn');
+
+            leftMenu.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+
+            if (leftMenu.classList.contains('collapsed')) {
+                toggleBtn.style.display = 'block';
+                collapseBtn.style.display = 'none';
+            } else {
+                toggleBtn.style.display = 'none';
+                collapseBtn.style.display = 'block';
+            }
+        }
+
+        document.getElementById('toggleBtn').addEventListener('click', toggleSidebar);
+        document.getElementById('collapseBtn').addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>
